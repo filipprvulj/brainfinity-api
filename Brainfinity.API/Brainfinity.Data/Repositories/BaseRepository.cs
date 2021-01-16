@@ -1,6 +1,8 @@
-﻿using Brainfinity.Data.Entities;
+﻿using AutoMapper;
+using Brainfinity.Data.Entities;
 using Brainfinity.Domain.Dtos;
 using Brainfinity.Domain.RepositoryInterfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,29 +15,51 @@ namespace Brainfinity.Data.Repositories
         where TEntity : BaseEntity
         where TDto : BaseDto
     {
-        public Task<int> EditEntity(Guid id)
+        private readonly ApplicationDbContext context;
+        private readonly IMapper mapper;
+
+        protected DbSet<TEntity> Entity { get; set; }
+
+        public BaseRepository(ApplicationDbContext context, IMapper mapper)
         {
-            throw new NotImplementedException();
+            this.context = context;
+            this.mapper = mapper;
+            Entity = context.Set<TEntity>();
         }
 
-        public Task<TDto> GetEntityById(Guid id)
+        public Task<int> EditEntity(TDto dto)
         {
-            throw new NotImplementedException();
+            var entity = mapper.Map<TEntity>(dto);
+            Entity.Update(entity);
+
+            return context.SaveChangesAsync();
         }
 
-        public Task<List<TDto>> GetEntityPaginated(int page, int pageItemCount)
+        public async Task<TDto> GetEntityById(Guid id)
         {
-            throw new NotImplementedException();
+            var entity = await Entity.FirstOrDefaultAsync(e => e.Id == id);
+            return mapper.Map<TDto>(entity);
         }
 
-        public Task<Guid> InsertEntity(TDto dto)
+        public async Task<List<TDto>> GetEntityPaginated(int page, int pageItemCount)
         {
-            throw new NotImplementedException();
+            var entities = Entity.Skip((page - 1) * pageItemCount).Take(pageItemCount);
+            return await mapper.ProjectTo<TDto>(entities).ToListAsync();
         }
 
-        public Task<int> RemoveEntity(Guid id)
+        public async Task<Guid> InsertEntity(TDto dto)
         {
-            throw new NotImplementedException();
+            var entity = mapper.Map<TEntity>(dto);
+            Entity.Add(entity);
+            await context.SaveChangesAsync();
+            return entity.Id;
+        }
+
+        public Task<int> RemoveEntity(TDto dto)
+        {
+            var entity = mapper.Map<TEntity>(dto);
+            Entity.Remove(entity);
+            return context.SaveChangesAsync();
         }
     }
 }

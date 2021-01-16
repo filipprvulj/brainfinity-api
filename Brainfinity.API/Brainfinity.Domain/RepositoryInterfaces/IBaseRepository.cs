@@ -16,8 +16,8 @@ namespace Brainfinity.Domain.RepositoryInterfaces
 
         public Task<List<TDto>> GetEntityPaginated(int page, int pageItemCount);
 
-        public Task<int> RemoveEntity(Guid id);
+        public Task<int> RemoveEntity(TDto dto);
 
-        public Task<int> EditEntity(Guid id);
+        public Task<int> EditEntity(TDto dto);
     }
 }
