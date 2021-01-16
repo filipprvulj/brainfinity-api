@@ -13,11 +13,12 @@ namespace Brainfinity.Data
 {
     public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
+        public DbSet<Status> Statuses { get; set; }
+        public DbSet<GradeLevel> GradeLevels { get; set; }
+
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
         }
-
-        public DbSet<Status> Statuses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
