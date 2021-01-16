@@ -1,4 +1,5 @@
 ﻿using Brainfinity.Data.Entities;
+using Brainfinity.Data.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -17,5 +18,12 @@ namespace Brainfinity.Data
         }
 
         public DbSet<Status> Statuses { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.SeedStatuses();
+        }
     }
 }
