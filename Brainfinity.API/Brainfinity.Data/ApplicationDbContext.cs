@@ -15,5 +15,7 @@ namespace Brainfinity.Data
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
         }
+
+        public DbSet<Status> Statuses { get; set; }
     }
 }
