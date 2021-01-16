@@ -19,5 +19,13 @@ namespace Brainfinity.Data.Extensions
                 new Status { Id = Guid.Parse("c68e06ad-d0d2-49c2-9f7a-a04ea52bcccd"), StatusName = StatusNames.Zavrseno }
                 );
         }
+
+        public static void SeedGradeLevels(this ModelBuilder builder)
+        {
+            builder.Entity<GradeLevel>().HasData(
+                new GradeLevel { Id = Guid.Parse("9b46dc05-75f8-49d8-a09d-19894e0c76a4"), GradeLevelName = GradeLevelNames.OsnovnaSkola },
+                new GradeLevel { Id = Guid.Parse("a251c876-81ce-4299-820d-ffc7a31fe436"), GradeLevelName = GradeLevelNames.SrednjaSkola }
+                );
+        }
     }
 }

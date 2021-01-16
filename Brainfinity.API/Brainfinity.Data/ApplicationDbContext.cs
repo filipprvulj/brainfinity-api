@@ -25,6 +25,7 @@ namespace Brainfinity.Data
             base.OnModelCreating(builder);
 
             builder.SeedStatuses();
+            builder.SeedGradeLevels();
         }
     }
 }
