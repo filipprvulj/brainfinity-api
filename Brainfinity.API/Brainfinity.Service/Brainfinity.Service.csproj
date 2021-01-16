@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Brainfinity.Data\Brainfinity.Data.csproj" />
     <ProjectReference Include="..\Brainfinity.Domain\Brainfinity.Domain.csproj" />
   </ItemGroup>
 
