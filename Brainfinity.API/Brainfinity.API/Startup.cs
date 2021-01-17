@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using System;
+using Brainfinity.API.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -45,6 +46,8 @@ namespace Brainfinity.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Brainfinity.API", Version = "v1" });
             });
 
+            services.AddRepositories();
+            services.AddServices();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
