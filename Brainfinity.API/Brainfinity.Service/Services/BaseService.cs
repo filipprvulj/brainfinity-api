@@ -2,6 +2,7 @@
 using Brainfinity.Domain.Dtos;
 using Brainfinity.Domain.RepositoryInterfaces;
 using Brainfinity.Domain.ServiceInterfaces;
+using Brainfinity.Service.ErrorHandling;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,27 +24,35 @@ namespace Brainfinity.Service.Services
 
         public Task<List<TDto>> GetEntitiesPaginated(int page, int pageItemCount)
         {
-            throw new NotImplementedException();
+            return repository.GetEntityPaginated(page, pageItemCount);
         }
 
-        public Task<TDto> GetEntityById(Guid id)
+        public async Task<TDto> GetEntityById(Guid id)
         {
-            throw new NotImplementedException();
+            var entity = await repository.GetEntityById(id);
+
+            if (entity == null)
+            {
+                throw new NotFoundException("Not found exception occured.");
+            }
+
+            return entity;
         }
 
-        public Task<Guid> InsertEntity(TDto dto)
+        public async Task<Guid> InsertEntity(TDto dto)
         {
-            throw new NotImplementedException();
+            return await repository.InsertEntity(dto);
         }
 
-        public Task<int> RemoveEntity(Guid id)
+        public async Task<int> RemoveEntity(Guid id)
         {
-            throw new NotImplementedException();
+            var entity = await GetEntityById(id);
+            return await repository.RemoveEntity(entity);
         }
 
-        public Task<int> UpdateEntity(Guid id)
+        public Task<int> UpdateEntity(TDto dto)
         {
-            throw new NotImplementedException();
+            return repository.EditEntity(dto);
         }
     }
 }

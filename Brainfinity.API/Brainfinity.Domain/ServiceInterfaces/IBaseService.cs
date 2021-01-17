@@ -18,6 +18,6 @@ namespace Brainfinity.Domain.ServiceInterfaces
 
         public Task<int> RemoveEntity(Guid id);
 
-        public Task<int> UpdateEntity(Guid id);
+        public Task<int> UpdateEntity(TDto dto);
     }
 }
