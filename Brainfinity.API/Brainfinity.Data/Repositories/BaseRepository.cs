@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Brainfinity.Data.Repositories
 {
-    public class BaseRepository<TEntity, TDto> : IBaseRepository<TDto>
+    public abstract class BaseRepository<TEntity, TDto> : IBaseRepository<TDto>
         where TEntity : BaseEntity
         where TDto : BaseDto
     {
@@ -20,7 +20,7 @@ namespace Brainfinity.Data.Repositories
 
         protected DbSet<TEntity> Entity { get; set; }
 
-        public BaseRepository(ApplicationDbContext context, IMapper mapper)
+        protected BaseRepository(ApplicationDbContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
