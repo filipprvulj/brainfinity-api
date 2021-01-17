@@ -37,7 +37,7 @@ namespace Brainfinity.Data.Repositories
 
         public async Task<TDto> GetEntityById(Guid id)
         {
-            var entity = await Entity.FirstOrDefaultAsync(e => e.Id == id);
+            var entity = await Entity.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
             return mapper.Map<TDto>(entity);
         }
 
