@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Brainfinity.Data.Entities;
+using Brainfinity.Domain.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +11,14 @@ namespace Brainfinity.Data
 {
     public class DataMapperProfile : Profile
     {
+        public DataMapperProfile()
+        {
+            #region Competition maps
+
+            CreateMap<Competition, CompetitionDto>();
+            CreateMap<CompetitionDto, Competition>();
+
+            #endregion Competition maps
+        }
     }
 }
