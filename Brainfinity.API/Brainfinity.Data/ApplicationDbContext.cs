@@ -29,6 +29,7 @@ namespace Brainfinity.Data
 
             builder.SeedStatuses();
             builder.SeedGradeLevels();
+            builder.SeedGrade();
         }
     }
 }
