@@ -17,6 +17,8 @@ namespace Brainfinity.Data
         public DbSet<GradeLevel> GradeLevels { get; set; }
         public DbSet<Competition> Competitions { get; set; }
 
+        public DbSet<Grade> Grades { get; set; }
+
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
         }
