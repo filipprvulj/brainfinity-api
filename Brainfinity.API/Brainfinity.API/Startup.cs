@@ -38,8 +38,9 @@ namespace Brainfinity.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Default")));
+            services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Default")), ServiceLifetime.Transient);
             services.AddIdentity<User, IdentityRole<Guid>>().AddEntityFrameworkStores<ApplicationDbContext>();
+          
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -52,7 +53,7 @@ namespace Brainfinity.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<User> userManager, RoleManager<IdentityRole<Guid>> roleManager)
         {
             app.UseMiddleware<ErrorHandlingMiddleware>();
             if (env.IsDevelopment())
@@ -67,6 +68,8 @@ namespace Brainfinity.API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSeedData(userManager, roleManager);
 
             app.UseEndpoints(endpoints =>
             {
