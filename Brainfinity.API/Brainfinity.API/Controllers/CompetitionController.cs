@@ -51,7 +51,7 @@ namespace Brainfinity.API.Controllers
             return NoContent();
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCompetition(CompetitionDto competition, Guid id)
         {
             await service.UpdateEntity(competition, id);
