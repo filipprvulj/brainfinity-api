@@ -47,12 +47,25 @@ namespace Brainfinity.Service.Services
         public async Task<int> RemoveEntity(Guid id)
         {
             var entity = await GetEntityById(id);
+
+            if (entity == null) 
+            {
+                throw new NotFoundException("Not found exception occured.");
+            }
+
             return await repository.RemoveEntity(entity);
         }
 
-        public Task<int> UpdateEntity(TDto dto)
+        public  Task<int> UpdateEntity(TDto dto, Guid id)
         {
-            return repository.EditEntity(dto);
+            var entity = GetEntityById(id);
+
+            if (entity == null) 
+            {
+                throw new ArgumentException("Not found exception occured.");            
+            }
+            
+            return  repository.EditEntity(dto);
         }
     }
 }

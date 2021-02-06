@@ -12,8 +12,8 @@ namespace Brainfinity.Data.Entities
 
         public int MaxPoints { get; set; }
 
-      
-        public Guid UserId { get; set; }
+       
+        public Guid MainExaminerId { get; set; }
         public User MainExaminer { get; set; }
 
         public Guid AssignmentGroupId { get; set; }
