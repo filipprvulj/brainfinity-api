@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Brainfinity.Data\Brainfinity.Data.csproj" />
+    <ProjectReference Include="..\Brainfinity.Domain\Brainfinity.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
