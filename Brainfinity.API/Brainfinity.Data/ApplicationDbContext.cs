@@ -20,7 +20,8 @@ namespace Brainfinity.Data
         public DbSet<Grade> Grades { get; set; }
 
         public DbSet<Assignment> Assignments { get; set; }
-        
+
+        public DbSet<AssignmentGroup> AssignmentGroups { get; set; }
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
         }

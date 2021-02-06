@@ -12,14 +12,11 @@ namespace Brainfinity.Data.Entities
 
         public int MaxPoints { get; set; }
 
-        public Guid GradeId { get; set; }
-
-        public Grade Grade { get; set; }
-
+      
         public Guid UserId { get; set; }
-
         public User MainExaminer { get; set; }
 
-
+        public Guid AssignmentGroupId { get; set; }
+        public AssignmentGroup AssignmentGroup { get; set; }
     }
 }
