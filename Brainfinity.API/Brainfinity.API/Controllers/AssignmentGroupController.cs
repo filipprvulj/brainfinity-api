@@ -54,9 +54,9 @@ namespace Brainfinity.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateAssignmentGroup(AssignmentGroupDto assignmentGroup)
+        public async Task<IActionResult> UpdateAssignmentGroup(AssignmentGroupDto assignmentGroup, Guid id)
         {
-            await service.UpdateEntity(assignmentGroup);
+            await service.UpdateEntity(assignmentGroup, id);
 
             return Ok();
         }
