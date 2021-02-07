@@ -15,7 +15,7 @@ namespace Brainfinity.Service.Services
 
         public AssignmentGroupService(IAssignmentGroupRepository repository) : base(repository) 
         {
-        
+            
         }
     }
 }

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Brainfinity.Domain.RepositoryInterfaces
+namespace Brainfinity.Domain.ServiceInterfaces
 {
-    public interface IAssignmentRepository : IBaseRepository<AssignmentDto>
+    public interface IAssignmentService : IBaseService<AssignmentDto>
     {
     }
 }
