@@ -36,6 +36,17 @@ namespace Brainfinity.Data
             CreateMap<User, UserDto>().ReverseMap();
 
             #endregion User login maps
+            #region AssignmentGroup maps
+
+            CreateMap<AssignmentGroup, AssignmentGroupDto>().ReverseMap();
+
+            #endregion AssignmentGroup maps
+
+            #region Assigmnent maps
+
+            CreateMap<Assignment, AssignmentDto>().ReverseMap();
+
+            #endregion Assignment maps
         }
     }
 }
