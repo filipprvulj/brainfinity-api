@@ -13,6 +13,7 @@ namespace Brainfinity.API.Extensions
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<ICompetitionRepository, CompetitionRepository>();
+            services.AddScoped<IAuthRepository, AuthRepostiory>();
 
             return services;
         }

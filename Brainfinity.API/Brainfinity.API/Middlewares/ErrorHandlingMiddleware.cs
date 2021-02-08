@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Brainfinity.API.Middlewares
 {
@@ -58,6 +59,11 @@ namespace Brainfinity.API.Middlewares
                 case UnauthorizedException:
                     code = HttpStatusCode.Unauthorized;
                     this.errorModel = new ErrorModel(unauthorizedExMessage);
+                    break;
+
+                case TransactionAbortedException:
+                    code = HttpStatusCode.BadRequest;
+                    this.errorModel = new ErrorModel(ex.Message);
                     break;
             }
             logger.LogError(ex, errorModel.Message);
