@@ -14,7 +14,9 @@ namespace Brainfinity.Data
     public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
         public DbSet<Status> Statuses { get; set; }
+
         public DbSet<GradeLevel> GradeLevels { get; set; }
+
         public DbSet<Competition> Competitions { get; set; }
 
         public DbSet<Grade> Grades { get; set; }
@@ -22,6 +24,9 @@ namespace Brainfinity.Data
         public DbSet<Assignment> Assignments { get; set; }
 
         public DbSet<AssignmentGroup> AssignmentGroups { get; set; }
+
+        public DbSet<TeamMember> TeamMembers { get; set; }
+
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
         }
