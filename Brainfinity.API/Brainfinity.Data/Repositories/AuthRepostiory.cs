@@ -2,6 +2,7 @@
 using Brainfinity.Data.Entities;
 using Brainfinity.Domain.Dtos;
 using Brainfinity.Domain.RepositoryInterfaces;
+using Brainfinity.Domain.Resources;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ namespace Brainfinity.Data.Repositories
                     var identityResult = await userManager.CreateAsync(user, password);
                     if (identityResult.Succeeded)
                     {
-                        await userManager.AddToRoleAsync(user, "Tim");
+                        await userManager.AddToRoleAsync(user, RoleNames.Tim);
                     }
 
                     scope.Complete();

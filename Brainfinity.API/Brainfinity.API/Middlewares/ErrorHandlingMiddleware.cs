@@ -65,6 +65,13 @@ namespace Brainfinity.API.Middlewares
                     code = HttpStatusCode.BadRequest;
                     this.errorModel = new ErrorModel(ex.Message);
                     break;
+
+                case FluentValidation.ValidationException:
+                    code = HttpStatusCode.BadRequest;
+                    var exeption = (FluentValidation.ValidationException)ex;
+                    result = JsonConvert.SerializeObject(new { errors = exeption.Errors.ToDictionary(x => x.PropertyName, x => x.ErrorMessage) });
+                    this.errorModel = new ErrorModel(validationExMessage);
+                    break;
             }
             logger.LogError(ex, errorModel.Message);
 

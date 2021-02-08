@@ -1,4 +1,6 @@
-﻿using Brainfinity.Domain.Dtos;
+﻿using AutoMapper;
+using Brainfinity.Domain.Dtos;
+using Brainfinity.Domain.Models;
 using Brainfinity.Domain.RepositoryInterfaces;
 using Brainfinity.Domain.ServiceInterfaces;
 using System;
@@ -12,15 +14,21 @@ namespace Brainfinity.Service.Services
     public class AuthService : IAuthService
     {
         private readonly IAuthRepository authRepository;
+        private readonly ITeamValidationService teamValidationService;
+        private readonly IMapper mapper;
 
-        public AuthService(IAuthRepository authRepository)
+        public AuthService(IAuthRepository authRepository, ITeamValidationService teamValidationService, IMapper mapper)
         {
             this.authRepository = authRepository;
+            this.teamValidationService = teamValidationService;
+            this.mapper = mapper;
         }
 
-        public async Task<Guid> CreateTeamAsync(UserDto userDto, string password)
+        public async Task<Guid> CreateTeamAsync(RegisterTeamModel team)
         {
-            return await authRepository.CreateTeamAsync(userDto, password);
+            teamValidationService.ValidateTeamRegistrationModel(team);
+            var userDto = mapper.Map<UserDto>(team);
+            return await authRepository.CreateTeamAsync(userDto, team.Password);
         }
     }
 }

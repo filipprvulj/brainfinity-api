@@ -1,5 +1,4 @@
-﻿using Brainfinity.Domain.Dtos;
-using Brainfinity.Domain.Models;
+﻿using Brainfinity.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Brainfinity.Domain.ServiceInterfaces
 {
-    public interface IAuthService
+    public interface ITeamValidationService
     {
-        public Task<Guid> CreateTeamAsync(RegisterTeamModel team);
+        public void ValidateTeamRegistrationModel(RegisterTeamModel team);
     }
 }

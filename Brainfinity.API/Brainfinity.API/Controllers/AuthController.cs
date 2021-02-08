@@ -27,9 +27,7 @@ namespace Brainfinity.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUser(RegisterTeamModel registerUser)
         {
-            var team = mapper.Map<UserDto>(registerUser);
-
-            return Ok(await authService.CreateTeamAsync(team, registerUser.Password));
+            return Ok(await authService.CreateTeamAsync(registerUser));
         }
     }
 }

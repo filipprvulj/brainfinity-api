@@ -19,6 +19,8 @@ using Brainfinity.API.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation.AspNetCore;
+using Brainfinity.Domain.Validators;
 
 namespace Brainfinity.API
 {
@@ -40,8 +42,16 @@ namespace Brainfinity.API
         {
             services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Default")), ServiceLifetime.Transient);
             services.AddIdentity<User, IdentityRole<Guid>>().AddEntityFrameworkStores<ApplicationDbContext>();
-          
-            services.AddControllers();
+
+            services.AddControllers()
+                .AddFluentValidation(fv =>
+                {
+                    fv.RegisterValidatorsFromAssemblyContaining<TeamRegistrationValidator>();
+                })
+                .ConfigureApiBehaviorOptions(options =>
+                {
+                    options.SuppressModelStateInvalidFilter = true;
+                });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Brainfinity.API", Version = "v1" });
