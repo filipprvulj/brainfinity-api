@@ -15,5 +15,6 @@ namespace Brainfinity.Data.Entities
         public List<TeamMember> TeamMembers { get; set; }
         public byte[] ProfilePhoto { get; set; }
         public byte[] Logo { get; set; }
+        public byte[] TeamPicture { get; set; }
     }
 }
