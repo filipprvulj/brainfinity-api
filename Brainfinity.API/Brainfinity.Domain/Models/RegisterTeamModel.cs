@@ -1,4 +1,5 @@
 ﻿using Brainfinity.Domain.Dtos;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,6 +17,10 @@ namespace Brainfinity.Domain.Models
         public string UserName { get; set; }
 
         public string Password { get; set; }
+
+        public IFormFile Logo { get; set; }
+
+        public IFormFile TeamPicture { get; set; }
 
         public List<TeamMemberModel> TeamMembers { get; set; }
     }

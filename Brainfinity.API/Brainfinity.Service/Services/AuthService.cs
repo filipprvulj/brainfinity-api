@@ -3,6 +3,7 @@ using Brainfinity.Domain.Dtos;
 using Brainfinity.Domain.Models;
 using Brainfinity.Domain.RepositoryInterfaces;
 using Brainfinity.Domain.ServiceInterfaces;
+using Brainfinity.Service.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +28,12 @@ namespace Brainfinity.Service.Services
         public async Task<Guid> CreateTeamAsync(RegisterTeamModel team)
         {
             teamValidationService.ValidateTeamRegistrationModel(team);
-            var userDto = mapper.Map<UserDto>(team);
-            return await authRepository.CreateTeamAsync(userDto, team.Password);
+
+            var teamDto = mapper.Map<TeamDto>(team);
+            teamDto.Logo = await team.Logo.ToByteArrayAsync();
+            teamDto.TeamPicture = await team.Logo.ToByteArrayAsync();
+
+            return await authRepository.CreateTeamAsync(teamDto, team.Password);
         }
     }
 }

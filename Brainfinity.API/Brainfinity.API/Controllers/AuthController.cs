@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Brainfinity.Domain.Dtos;
-using Brainfinity.Domain.Models;
+﻿using Brainfinity.Domain.Models;
 using Brainfinity.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,17 +13,15 @@ namespace Brainfinity.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IMapper mapper;
         private readonly IAuthService authService;
 
-        public AuthController(IMapper mapper, IAuthService authService)
+        public AuthController(IAuthService authService)
         {
-            this.mapper = mapper;
             this.authService = authService;
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterUser(RegisterTeamModel registerUser)
+        public async Task<IActionResult> RegisterUser([FromForm] RegisterTeamModel registerUser)
         {
             return Ok(await authService.CreateTeamAsync(registerUser));
         }
