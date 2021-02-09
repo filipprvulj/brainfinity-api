@@ -9,6 +9,6 @@ namespace Brainfinity.Domain.RepositoryInterfaces
 {
     public interface IAuthRepository
     {
-        public Task<Guid> CreateTeamAsync(UserDto userDto, string password);
+        public Task<Guid> CreateTeamAsync(TeamDto teamDto, string password);
     }
 }

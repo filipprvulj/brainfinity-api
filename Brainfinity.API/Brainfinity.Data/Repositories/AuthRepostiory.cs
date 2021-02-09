@@ -24,17 +24,17 @@ namespace Brainfinity.Data.Repositories
             this.userManager = userManager;
         }
 
-        public async Task<Guid> CreateTeamAsync(UserDto userDto, string password)
+        public async Task<Guid> CreateTeamAsync(TeamDto teamDto, string password)
         {
-            var user = mapper.Map<User>(userDto);
+            var team = mapper.Map<User>(teamDto);
             try
             {
                 using (TransactionScope scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
                 {
-                    var identityResult = await userManager.CreateAsync(user, password);
+                    var identityResult = await userManager.CreateAsync(team, password);
                     if (identityResult.Succeeded)
                     {
-                        await userManager.AddToRoleAsync(user, RoleNames.Tim);
+                        await userManager.AddToRoleAsync(team, RoleNames.Tim);
                     }
 
                     scope.Complete();
@@ -45,7 +45,7 @@ namespace Brainfinity.Data.Repositories
                 throw new TransactionAbortedException(ex.Message);
             }
 
-            return user.Id;
+            return team.Id;
         }
     }
 }
