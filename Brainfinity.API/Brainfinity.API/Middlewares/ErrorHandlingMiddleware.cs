@@ -47,7 +47,7 @@ namespace Brainfinity.API.Middlewares
             {
                 case ValidationException:
                     code = HttpStatusCode.BadRequest;
-                    result = JsonConvert.SerializeObject(new { error = ex.Message });
+                    result = JsonConvert.SerializeObject(new { error = ex.Data });
                     this.errorModel = new ErrorModel(validationExMessage);
                     break;
 

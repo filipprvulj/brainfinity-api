@@ -25,5 +25,11 @@ namespace Brainfinity.API.Controllers
         {
             return Ok(await authService.CreateTeamAsync(registerUser));
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> LoginUser(LoginUserModel loginUser)
+        {
+            return Ok(await authService.LoginUserAsync(loginUser));
+        }
     }
 }

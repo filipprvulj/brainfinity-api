@@ -30,6 +30,12 @@ namespace Brainfinity.Data
             CreateMap<TeamMemberModel, TeamMemberDto>();
 
             #endregion User registration maps
+
+            #region User login maps
+
+            CreateMap<User, UserDto>().ReverseMap();
+
+            #endregion User login maps
         }
     }
 }

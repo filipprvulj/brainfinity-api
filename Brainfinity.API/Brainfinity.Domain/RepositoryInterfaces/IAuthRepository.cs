@@ -9,6 +9,12 @@ namespace Brainfinity.Domain.RepositoryInterfaces
 {
     public interface IAuthRepository
     {
+        public Task<UserDto> GetUserByEmailAsync(string email);
+
+        public Task<bool> CheckPasswordAsync(UserDto userDto, string password);
+
+        public Task<IList<string>> GetUserRolesAsync(UserDto userDto);
+
         public Task<Guid> CreateTeamAsync(TeamDto teamDto, string password);
     }
 }

@@ -24,6 +24,12 @@ namespace Brainfinity.Data.Repositories
             this.userManager = userManager;
         }
 
+        public async Task<bool> CheckPasswordAsync(UserDto userDto, string password)
+        {
+            var user = await userManager.FindByIdAsync(userDto.Id.ToString());
+            return await userManager.CheckPasswordAsync(user, password);
+        }
+
         public async Task<Guid> CreateTeamAsync(TeamDto teamDto, string password)
         {
             var team = mapper.Map<User>(teamDto);
@@ -46,6 +52,17 @@ namespace Brainfinity.Data.Repositories
             }
 
             return team.Id;
+        }
+
+        public async Task<UserDto> GetUserByEmailAsync(string email)
+        {
+            return mapper.Map<UserDto>(await userManager.FindByEmailAsync(email));
+        }
+
+        public Task<IList<string>> GetUserRolesAsync(UserDto userDto)
+        {
+            User user = mapper.Map<User>(userDto);
+            return userManager.GetRolesAsync(user);
         }
     }
 }

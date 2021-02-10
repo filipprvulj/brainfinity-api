@@ -11,5 +11,7 @@ namespace Brainfinity.Domain.ServiceInterfaces
     public interface IAuthService
     {
         public Task<Guid> CreateTeamAsync(RegisterTeamModel team);
+
+        public Task<string> LoginUserAsync(LoginUserModel loginUser);
     }
 }
