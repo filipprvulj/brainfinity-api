@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Brainfinity.Domain.Options;
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;

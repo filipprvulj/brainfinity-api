@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Brainfinity.Domain
+namespace Brainfinity.Domain.Options
 {
     public class ImageOptions
     {

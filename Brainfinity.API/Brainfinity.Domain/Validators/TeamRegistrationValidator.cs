@@ -1,4 +1,5 @@
 ﻿using Brainfinity.Domain.Models;
+using Brainfinity.Domain.Options;
 using Brainfinity.Domain.RepositoryInterfaces;
 using Brainfinity.Domain.ValidatorExtensions;
 using FluentValidation;
