@@ -61,6 +61,7 @@ namespace Brainfinity.API
             services.AddSwaggerWithAuth();
 
             JwtOptions options = Configuration.GetSection("JwtSettings").Get<JwtOptions>();
+            services.AddAuthPolicies();
             services.AddAuth(options);
 
             services.AddRepositories();
@@ -83,6 +84,7 @@ namespace Brainfinity.API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseSeedData(userManager, roleManager);

@@ -72,6 +72,11 @@ namespace Brainfinity.API.Middlewares
                     result = JsonConvert.SerializeObject(new { errors = exeption.Errors.ToDictionary(x => x.PropertyName, x => x.ErrorMessage) });
                     this.errorModel = new ErrorModel(validationExMessage);
                     break;
+
+                default:
+                    code = HttpStatusCode.InternalServerError;
+                    this.errorModel = new ErrorModel(ex.Message);
+                    break;
             }
             logger.LogError(ex, errorModel.Message);
 

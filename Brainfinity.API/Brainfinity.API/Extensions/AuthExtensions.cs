@@ -1,4 +1,5 @@
 ﻿using Brainfinity.Domain.Options;
+using Brainfinity.Domain.Resources;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -15,7 +16,11 @@ namespace Brainfinity.API.Extensions
     {
         public static IServiceCollection AddAuth(this IServiceCollection services, JwtOptions jwtOptions)
         {
-            services.AddAuthentication(cfg => cfg.DefaultScheme = JwtBearerDefaults.AuthenticationScheme)
+            services.AddAuthentication(cfg =>
+            {
+                cfg.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                cfg.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
                 .AddJwtBearer(options =>
                 {
                     options.RequireHttpsMetadata = false;
@@ -35,11 +40,31 @@ namespace Brainfinity.API.Extensions
             return services;
         }
 
+        public static IServiceCollection AddAuthPolicies(this IServiceCollection services)
+        {
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(RoleNames.Tim,
+                    policy => policy.RequireRole(RoleNames.Tim));
+
+                options.AddPolicy(RoleNames.Ziri,
+                    policy => policy.RequireRole(RoleNames.Ziri));
+
+                options.AddPolicy(RoleNames.Pregledac,
+                    policy => policy.RequireRole(RoleNames.Pregledac));
+
+                options.AddPolicy(RoleNames.Supervizor,
+                    policy => policy.RequireRole(RoleNames.Supervizor, RoleNames.Supervizor));
+            });
+
+            return services;
+        }
+
         public static IServiceCollection AddSwaggerWithAuth(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "RushHour", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Brainfinity.API", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "JWT Authorization header using the Bearer scheme.",
