@@ -2,8 +2,10 @@
 using Brainfinity.Domain.RepositoryInterfaces;
 using Brainfinity.Domain.ValidatorExtensions;
 using FluentValidation;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +14,7 @@ namespace Brainfinity.Domain.Validators
 {
     public class TeamRegistrationValidator : AbstractValidator<RegisterTeamModel>
     {
-        public TeamRegistrationValidator(IUserRepository userRepository)
+        public TeamRegistrationValidator(IUserRepository userRepository, IOptions<ImageOptions> imageOptions)
         {
             CascadeMode = CascadeMode.Stop;
 
@@ -58,6 +60,16 @@ namespace Brainfinity.Domain.Validators
                         .WithMessage("Prezime ne može biti prazno.")
                         .ValidName();
                 });
+
+            RuleFor(team => team.Logo)
+                .NotEmpty()
+                .WithMessage("Logo ne može biti prazan")
+                .SetValidator(new FormFileValidator(imageOptions));
+
+            RuleFor(team => team.TeamPicture)
+                .NotEmpty()
+                .WithMessage("Slika tima ne može biti prazna")
+                .SetValidator(new FormFileValidator(imageOptions));
         }
     }
 }
