@@ -22,6 +22,7 @@ using System.Threading.Tasks;
 using FluentValidation.AspNetCore;
 using Brainfinity.Domain.Validators;
 using Brainfinity.Domain;
+using Brainfinity.Domain.Options;
 
 namespace Brainfinity.API
 {
@@ -43,7 +44,9 @@ namespace Brainfinity.API
         {
             services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Default")), ServiceLifetime.Transient);
             services.AddIdentity<User, IdentityRole<Guid>>().AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.Configure<ImageOptions>(Configuration.GetSection("Images"));
+            services.Configure<JwtOptions>(Configuration.GetSection("JwtSettings"));
 
             services.AddControllers()
                 .AddFluentValidation(fv =>
