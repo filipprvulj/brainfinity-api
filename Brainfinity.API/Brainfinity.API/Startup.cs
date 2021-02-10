@@ -57,10 +57,11 @@ namespace Brainfinity.API
                 {
                     options.SuppressModelStateInvalidFilter = true;
                 });
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Brainfinity.API", Version = "v1" });
-            });
+
+            services.AddSwaggerWithAuth();
+
+            JwtOptions options = Configuration.GetSection("JwtSettings").Get<JwtOptions>();
+            services.AddAuth(options);
 
             services.AddRepositories();
             services.AddServices();
