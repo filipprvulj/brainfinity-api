@@ -1,5 +1,7 @@
 ﻿using Brainfinity.Domain.Dtos;
+using Brainfinity.Domain.Resources;
 using Brainfinity.Domain.ServiceInterfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +13,7 @@ namespace Brainfinity.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Policy = RoleNames.Supervizor)]
     public class CompetitionController : ControllerBase
     {
         private readonly ICompetitionService service;

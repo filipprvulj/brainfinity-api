@@ -13,6 +13,9 @@ namespace Brainfinity.API.Extensions
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddScoped<ICompetitionService, CompetitionService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ITeamValidationService, TeamValidationService>();
+            services.AddScoped<ISecurityService, SecurityService>();
 
             return services;
         }

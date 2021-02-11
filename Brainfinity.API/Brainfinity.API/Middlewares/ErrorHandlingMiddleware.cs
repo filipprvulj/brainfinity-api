@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Brainfinity.API.Middlewares
 {
@@ -46,7 +47,7 @@ namespace Brainfinity.API.Middlewares
             {
                 case ValidationException:
                     code = HttpStatusCode.BadRequest;
-                    result = JsonConvert.SerializeObject(new { error = ex.Message });
+                    result = JsonConvert.SerializeObject(new { error = ex.Data });
                     this.errorModel = new ErrorModel(validationExMessage);
                     break;
 
@@ -58,6 +59,23 @@ namespace Brainfinity.API.Middlewares
                 case UnauthorizedException:
                     code = HttpStatusCode.Unauthorized;
                     this.errorModel = new ErrorModel(unauthorizedExMessage);
+                    break;
+
+                case TransactionAbortedException:
+                    code = HttpStatusCode.BadRequest;
+                    this.errorModel = new ErrorModel(ex.Message);
+                    break;
+
+                case FluentValidation.ValidationException:
+                    code = HttpStatusCode.BadRequest;
+                    var exeption = (FluentValidation.ValidationException)ex;
+                    result = JsonConvert.SerializeObject(new { errors = exeption.Errors.ToDictionary(x => x.PropertyName, x => x.ErrorMessage) });
+                    this.errorModel = new ErrorModel(validationExMessage);
+                    break;
+
+                default:
+                    code = HttpStatusCode.InternalServerError;
+                    this.errorModel = new ErrorModel(ex.Message);
                     break;
             }
             logger.LogError(ex, errorModel.Message);

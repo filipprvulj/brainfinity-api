@@ -1,5 +1,7 @@
 ﻿using Brainfinity.Domain.Dtos;
+using Brainfinity.Domain.Resources;
 using Brainfinity.Domain.ServiceInterfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,9 +13,9 @@ namespace Brainfinity.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Policy = RoleNames.Supervizor)]
     public class AssignmentGroupController : ControllerBase
     {
-
         private readonly IAssignmentGroupService service;
 
         public AssignmentGroupController(IAssignmentGroupService service)
@@ -22,7 +24,7 @@ namespace Brainfinity.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAssignmentGroup(Guid id) 
+        public async Task<IActionResult> GetAssignmentGroup(Guid id)
         {
             var assignmentGroup = await service.GetEntityById(id);
 
@@ -30,7 +32,7 @@ namespace Brainfinity.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> InsertAssignmentGroup(AssignmentGroupDto assignmentGroup) 
+        public async Task<IActionResult> InsertAssignmentGroup(AssignmentGroupDto assignmentGroup)
         {
             var insert = await service.InsertEntity(assignmentGroup);
 
@@ -38,7 +40,7 @@ namespace Brainfinity.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAssignmentGroups(int page, int pageItemCount) 
+        public async Task<IActionResult> GetAssignmentGroups(int page, int pageItemCount)
         {
             var assignmentGroups = await service.GetEntitiesPaginated(page, pageItemCount);
 
@@ -46,7 +48,7 @@ namespace Brainfinity.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> RemoveAssignmentGroup(Guid id) 
+        public async Task<IActionResult> RemoveAssignmentGroup(Guid id)
         {
             await service.RemoveEntity(id);
 
@@ -60,6 +62,5 @@ namespace Brainfinity.API.Controllers
 
             return Ok();
         }
-
     }
 }

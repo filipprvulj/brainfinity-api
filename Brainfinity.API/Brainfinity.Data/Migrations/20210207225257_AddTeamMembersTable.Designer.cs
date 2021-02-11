@@ -4,14 +4,16 @@ using Brainfinity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Brainfinity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210207225257_AddTeamMembersTable")]
+    partial class AddTeamMembersTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -300,9 +302,6 @@ namespace Brainfinity.Data.Migrations
 
                     b.Property<string>("TeamName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("TeamPicture")
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");

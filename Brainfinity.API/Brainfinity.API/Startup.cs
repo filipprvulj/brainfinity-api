@@ -19,6 +19,10 @@ using Brainfinity.API.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation.AspNetCore;
+using Brainfinity.Domain.Validators;
+using Brainfinity.Domain;
+using Brainfinity.Domain.Options;
 
 namespace Brainfinity.API
 {
@@ -40,12 +44,25 @@ namespace Brainfinity.API
         {
             services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Default")), ServiceLifetime.Transient);
             services.AddIdentity<User, IdentityRole<Guid>>().AddEntityFrameworkStores<ApplicationDbContext>();
-          
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Brainfinity.API", Version = "v1" });
-            });
+
+            services.Configure<ImageOptions>(Configuration.GetSection("Images"));
+            services.Configure<JwtOptions>(Configuration.GetSection("JwtSettings"));
+
+            services.AddControllers()
+                .AddFluentValidation(fv =>
+                {
+                    fv.RegisterValidatorsFromAssemblyContaining<TeamRegistrationValidator>();
+                })
+                .ConfigureApiBehaviorOptions(options =>
+                {
+                    options.SuppressModelStateInvalidFilter = true;
+                });
+
+            services.AddSwaggerWithAuth();
+
+            JwtOptions options = Configuration.GetSection("JwtSettings").Get<JwtOptions>();
+            services.AddAuthPolicies();
+            services.AddAuth(options);
 
             services.AddRepositories();
             services.AddServices();
@@ -67,6 +84,7 @@ namespace Brainfinity.API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseSeedData(userManager, roleManager);
