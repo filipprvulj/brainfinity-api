@@ -15,6 +15,8 @@ namespace Brainfinity.API.Extensions
             services.AddScoped<ICompetitionRepository, CompetitionRepository>();
             services.AddScoped<IAuthRepository, AuthRepostiory>();
             services.AddScoped<IUserRepository, UserRepostitory>();
+            services.AddScoped<IAssignmentRepository, AssignmentRepository>();
+            services.AddScoped<IAssignmentGroupRepository, AssignmentGroupRepository>();
 
             return services;
         }

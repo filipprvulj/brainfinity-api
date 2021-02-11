@@ -16,6 +16,8 @@ namespace Brainfinity.API.Extensions
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ITeamValidationService, TeamValidationService>();
             services.AddScoped<ISecurityService, SecurityService>();
+            services.AddScoped<IAssignmentService, AssignmentService>();
+            services.AddScoped<IAssignmentGroupService, AssignmentGroupService>();
 
             return services;
         }
