@@ -33,13 +33,6 @@ namespace Brainfinity.Domain.Validators
                 .WithMessage("'{PropertyValue}' nije validna email adresa.")
                 .UniqueEmail(userRepository);
 
-            RuleFor(team => team.UserName)
-                .NotEmpty()
-                .WithMessage("Korisničko ime ne može biti prazno.")
-                .Length(2, 20)
-                .WithMessage("Korisničko ime mora imati između 2 i 20 karaktera.")
-                .UniqueTeamUsername(userRepository);
-
             RuleFor(team => team.Password)
                 .NotEmpty()
                 .WithMessage("Lozinka ne može biti prazna.")
