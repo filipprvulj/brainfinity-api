@@ -38,6 +38,7 @@ namespace Brainfinity.API
         }
 
         public IConfiguration Configuration { get; }
+        private const string customCorsPolicy = "customCorsPolicy";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -47,6 +48,8 @@ namespace Brainfinity.API
 
             services.Configure<ImageOptions>(Configuration.GetSection("Images"));
             services.Configure<JwtOptions>(Configuration.GetSection("JwtSettings"));
+
+            services.AddCustomCors(customCorsPolicy, Configuration);
 
             services.AddControllers()
                 .AddFluentValidation(fv =>
@@ -83,6 +86,8 @@ namespace Brainfinity.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(customCorsPolicy);
 
             app.UseAuthentication();
             app.UseAuthorization();
