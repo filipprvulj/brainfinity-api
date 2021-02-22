@@ -27,6 +27,8 @@ namespace Brainfinity.Data
 
         public DbSet<TeamMember> TeamMembers { get; set; }
 
+        public DbSet<TeamMentor> TeamMentors { get; set; }
+
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
         }

@@ -21,5 +21,7 @@ namespace Brainfinity.Domain.Models
         public IFormFile TeamPicture { get; set; }
 
         public List<TeamMemberModel> TeamMembers { get; set; }
+
+        public TeamMentorModel TeamMentor { get; set; }
     }
 }

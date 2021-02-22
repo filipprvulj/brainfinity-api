@@ -55,6 +55,27 @@ namespace Brainfinity.Domain.Validators
                         .ValidName();
                 });
 
+            RuleFor(team => team.TeamMentor)
+                .ChildRules(cr =>
+                {
+                    cr.CascadeMode = CascadeMode.Stop;
+                    cr.RuleFor(teamMentor => teamMentor.Email)
+                        .NotEmpty()
+                        .WithMessage("Email adresa mentora ne može biti prazna.")
+                        .EmailAddress()
+                        .WithMessage("'{PropertyValue}' nije validna email adresa.");
+
+                    cr.RuleFor(teamMentor => teamMentor.FirstName)
+                        .NotEmpty()
+                        .WithMessage("Ime mentora ne može biti prazno.")
+                        .ValidName();
+
+                    cr.RuleFor(teamMentor => teamMentor.LastName)
+                        .NotEmpty()
+                        .WithMessage("Prezime mentora ne može biti prazno.")
+                        .ValidName();
+                });
+
             RuleFor(team => team.Logo)
                 .NotEmpty()
                 .WithMessage("Logo ne može biti prazan")

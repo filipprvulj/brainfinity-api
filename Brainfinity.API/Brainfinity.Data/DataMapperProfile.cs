@@ -23,12 +23,14 @@ namespace Brainfinity.Data
             #region User registration maps
 
             CreateMap<TeamMember, TeamMemberDto>().ReverseMap();
+            CreateMap<TeamMentor, TeamMentorDto>().ReverseMap();
             CreateMap<User, TeamDto>().ReverseMap();
             CreateMap<RegisterTeamModel, TeamDto>()
                 .ForMember(d => d.Logo, opt => opt.Ignore())
                 .ForMember(d => d.TeamPicture, opt => opt.Ignore())
                 .ForMember(d => d.UserName, opt => opt.MapFrom(s => s.Email));
             CreateMap<TeamMemberModel, TeamMemberDto>();
+            CreateMap<TeamMentorModel, TeamMentorDto>();
 
             #endregion User registration maps
 
