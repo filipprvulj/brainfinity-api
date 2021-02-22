@@ -13,6 +13,7 @@ namespace Brainfinity.Data.Entities
         public string LastName { get; set; }
         public string TeamName { get; set; }
         public List<TeamMember> TeamMembers { get; set; }
+        public TeamMentor TeamMentor { get; set; }
         public byte[] ProfilePhoto { get; set; }
         public byte[] Logo { get; set; }
         public byte[] TeamPicture { get; set; }
