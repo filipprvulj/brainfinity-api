@@ -4,14 +4,16 @@ using Brainfinity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Brainfinity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210301125640_AddUserCompetitionManyToManyTable")]
+    partial class AddUserCompetitionManyToManyTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -283,9 +285,6 @@ namespace Brainfinity.Data.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("GradeId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
@@ -338,8 +337,6 @@ namespace Brainfinity.Data.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GradeId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -571,15 +568,9 @@ namespace Brainfinity.Data.Migrations
 
             modelBuilder.Entity("Brainfinity.Data.Entities.User", b =>
                 {
-                    b.HasOne("Brainfinity.Data.Entities.Grade", "Grade")
-                        .WithMany()
-                        .HasForeignKey("GradeId");
-
                     b.HasOne("Brainfinity.Data.Entities.TeamMentor", "TeamMentor")
                         .WithMany()
                         .HasForeignKey("TeamMentorId");
-
-                    b.Navigation("Grade");
 
                     b.Navigation("TeamMentor");
                 });

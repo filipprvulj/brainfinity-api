@@ -13,5 +13,7 @@ namespace Brainfinity.Domain.Dtos
         public byte[] CompetitionPicture { get; set; }
 
         public Guid StatusId { get; set; }
+
+        public ICollection<UserDto> Teams { get; set; }
     }
 }

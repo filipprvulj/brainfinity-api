@@ -15,5 +15,6 @@ namespace Brainfinity.Domain.Dtos
         public byte[] TeamPicture { get; set; }
         public List<TeamMemberDto> TeamMembers { get; set; }
         public TeamMentorDto TeamMentor { get; set; }
+        public Guid GradeId { get; set; }
     }
 }

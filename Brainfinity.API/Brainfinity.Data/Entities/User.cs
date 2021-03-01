@@ -17,5 +17,8 @@ namespace Brainfinity.Data.Entities
         public byte[] ProfilePhoto { get; set; }
         public byte[] Logo { get; set; }
         public byte[] TeamPicture { get; set; }
+        public ICollection<Competition> Competitions { get; set; }
+        public Guid? GradeId { get; set; }
+        public Grade Grade { get; set; }
     }
 }
