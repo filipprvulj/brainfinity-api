@@ -85,6 +85,10 @@ namespace Brainfinity.Domain.Validators
                 .NotEmpty()
                 .WithMessage("Slika tima ne može biti prazna")
                 .SetValidator(new FormFileValidator(imageOptions));
+
+            RuleFor(team => team.GradeId)
+                .NotEmpty()
+                .WithMessage("Morate odabrati razred");
         }
     }
 }

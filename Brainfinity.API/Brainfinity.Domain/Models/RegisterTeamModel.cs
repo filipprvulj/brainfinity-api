@@ -23,5 +23,7 @@ namespace Brainfinity.Domain.Models
         public List<TeamMemberModel> TeamMembers { get; set; }
 
         public TeamMentorModel TeamMentor { get; set; }
+
+        public Guid GradeId { get; set; }
     }
 }
