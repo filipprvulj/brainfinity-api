@@ -16,7 +16,9 @@ namespace Brainfinity.Data
         {
             #region Competition maps
 
-            CreateMap<Competition, CompetitionDto>().ReverseMap();
+            CreateMap<Competition, CompetitionDto>()
+                .ReverseMap()
+                .ForMember(d => d.Users, opt => opt.MapFrom(s => s.Teams));
 
             #endregion Competition maps
 

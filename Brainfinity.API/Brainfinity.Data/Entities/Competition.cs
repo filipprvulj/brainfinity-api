@@ -17,5 +17,7 @@ namespace Brainfinity.Data.Entities
         public Guid StatusId { get; set; }
 
         public Status Status { get; set; }
+
+        public ICollection<User> Users { get; set; }
     }
 }
