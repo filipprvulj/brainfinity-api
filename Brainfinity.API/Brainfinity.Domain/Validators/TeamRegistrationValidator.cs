@@ -15,7 +15,7 @@ namespace Brainfinity.Domain.Validators
 {
     public class TeamRegistrationValidator : AbstractValidator<RegisterTeamModel>
     {
-        public TeamRegistrationValidator(IUserRepository userRepository, IOptions<ImageOptions> imageOptions)
+        public TeamRegistrationValidator(ITeamRepository userRepository, IOptions<ImageOptions> imageOptions)
         {
             CascadeMode = CascadeMode.Stop;
 

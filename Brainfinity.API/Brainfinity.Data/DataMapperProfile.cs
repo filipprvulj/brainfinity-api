@@ -41,6 +41,16 @@ namespace Brainfinity.Data
             CreateMap<User, UserDto>().ReverseMap();
 
             #endregion User login maps
+
+            #region Team maps
+
+            CreateMap<User, TeamOutputModel>()
+                .ForMember(d => d.Mentor, opt => opt.MapFrom(s =>
+                    string.Join(" ", s.TeamMentor.FirstName, s.TeamMentor.LastName)))
+                .ForMember(d => d.Grade, opt => opt.MapFrom(s =>
+                    string.Join(" - ", s.Grade.GradeLevel.GradeLevelName, s.Grade.Name)));
+
+            #endregion Team maps
         }
     }
 }

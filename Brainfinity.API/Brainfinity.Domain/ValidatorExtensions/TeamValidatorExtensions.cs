@@ -22,19 +22,19 @@ namespace Brainfinity.Domain.ValidatorExtensions
                 .WithMessage("Ime i prezime mogu sadržati samo slova.");
         }
 
-        public static IRuleBuilderOptions<T, TProperty> UniqueEmail<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder, IUserRepository userRepository)
+        public static IRuleBuilderOptions<T, TProperty> UniqueEmail<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder, ITeamRepository userRepository)
         {
             return ruleBuilder.MustAsync(async (email, cancellation) => await userRepository.IsTeamEmailUniqueAsync(email.ToString()))
                 .WithMessage("Email adresa mora biti jedinstvena.");
         }
 
-        public static IRuleBuilderOptions<T, TProperty> UniqueTeamName<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder, IUserRepository userRepository)
+        public static IRuleBuilderOptions<T, TProperty> UniqueTeamName<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder, ITeamRepository userRepository)
         {
             return ruleBuilder.MustAsync(async (teamName, cancellation) => await userRepository.IsTeamNameUniqueAsync(teamName.ToString()))
                 .WithMessage("Naziv tima mora biti jedinstven.");
         }
 
-        public static IRuleBuilderOptions<T, TProperty> UniqueTeamUsername<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder, IUserRepository userRepository)
+        public static IRuleBuilderOptions<T, TProperty> UniqueTeamUsername<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder, ITeamRepository userRepository)
         {
             return ruleBuilder.MustAsync(async (username, cancellation) => await userRepository.IsTeamUsernameUniqueAsync(username.ToString()))
                 .WithMessage("Korisničko ime tima mora biti jedinstveno.");
