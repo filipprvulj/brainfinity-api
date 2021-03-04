@@ -1,4 +1,5 @@
-﻿using Brainfinity.Domain.Pagination;
+﻿using Brainfinity.Domain.Models;
+using Brainfinity.Domain.Pagination;
 using Brainfinity.Domain.Resources;
 using Brainfinity.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -30,9 +31,9 @@ namespace Brainfinity.API.Controllers
         }
 
         [HttpPut("{teamId}")]
-        public async Task<IActionResult> TeamCompetitionAplly(Guid teamId, Guid competitionId)
+        public async Task<IActionResult> TeamCompetitionAplly(Guid teamId, TeamCompetitionApplyModel model)
         {
-            await teamService.TeamCompetitionApply(teamId, competitionId);
+            await teamService.TeamCompetitionApply(teamId, model.CompetitionId);
             return NoContent();
         }
     }

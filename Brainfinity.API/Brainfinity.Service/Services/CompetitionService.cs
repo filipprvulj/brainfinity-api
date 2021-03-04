@@ -14,5 +14,10 @@ namespace Brainfinity.Service.Services
         public CompetitionService(ICompetitionRepository repository) : base(repository)
         {
         }
+
+        public Task<List<CompetitionDto>> GetIncomingCompetitionsAsync()
+        {
+            return repository.GetIncomingCompetitionsAsync();
+        }
     }
 }

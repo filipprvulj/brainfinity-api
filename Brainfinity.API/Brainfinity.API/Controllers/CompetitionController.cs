@@ -60,5 +60,11 @@ namespace Brainfinity.API.Controllers
             await service.UpdateEntity(competition, id);
             return Ok();
         }
+
+        [HttpGet("incoming")]
+        public async Task<IActionResult> GetIncomingCompetitions()
+        {
+            return Ok(await service.GetIncomingCompetitionsAsync());
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace Brainfinity.Domain.ServiceInterfaces
 {
     public interface ICompetitionService : IBaseService<CompetitionDto>
     {
+        public Task<List<CompetitionDto>> GetIncomingCompetitionsAsync();
     }
 }

@@ -9,5 +9,6 @@ namespace Brainfinity.Domain.RepositoryInterfaces
 {
     public interface ICompetitionRepository : IBaseRepository<CompetitionDto>
     {
+        public Task<List<CompetitionDto>> GetIncomingCompetitionsAsync();
     }
 }

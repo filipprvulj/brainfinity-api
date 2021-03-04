@@ -16,7 +16,7 @@ namespace Brainfinity.Data.Repositories
         where TDto : BaseDto
     {
         private readonly ApplicationDbContext context;
-        private readonly IMapper mapper;
+        protected readonly IMapper mapper;
 
         protected DbSet<TEntity> Entity { get; set; }
 

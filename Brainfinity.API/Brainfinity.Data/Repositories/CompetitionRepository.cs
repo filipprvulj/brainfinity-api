@@ -2,6 +2,8 @@
 using Brainfinity.Data.Entities;
 using Brainfinity.Domain.Dtos;
 using Brainfinity.Domain.RepositoryInterfaces;
+using Brainfinity.Domain.Resources;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,11 @@ namespace Brainfinity.Data.Repositories
     {
         public CompetitionRepository(ApplicationDbContext context, IMapper mapper) : base(context, mapper)
         {
+        }
+
+        public Task<List<CompetitionDto>> GetIncomingCompetitionsAsync()
+        {
+            return mapper.ProjectTo<CompetitionDto>(Entity.Where(c => c.Status.StatusName == StatusNames.Nadolazece)).ToListAsync();
         }
     }
 }
